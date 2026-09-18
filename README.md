@@ -33,7 +33,7 @@ The project implements the core building blocks of a GPT-style Transformer by ha
 | Model architecture | Decoder-only Transformer (GPT-style), pre-norm residual blocks, causal self-attention |
 | Framework | PyTorch |
 | Tokenization | Character-level (custom vocabulary built from the training text) |
-| Vocabulary size | Not reported — not printed in the notebook output (determined at runtime as the number of unique characters in the training text) |
+| Vocabulary size |  65 ,unique characters in the training text) |
 | Context length (`block_size`) | 256 |
 | Embedding dimension (`n_embd`) | 384 |
 | Attention heads (`n_head`) | 6 |
@@ -66,7 +66,7 @@ Causal self-attention is implemented as described (masking is real and verified 
 
 | Parameter | Value | Description |
 |---|---|---|
-| `vocab_size` | Not reported | Number of unique characters in the training text; computed at runtime, not printed |
+| `vocab_size` | 65 | Number of unique characters in the training text |
 | `block_size` | 256 | Maximum context length (tokens attended to per prediction) |
 | `n_embd` | 384 | Embedding / residual-stream dimension |
 | `n_head` | 6 | Number of attention heads per block |
@@ -114,7 +114,7 @@ decode = lambda l: ''.join([itos[i] for i in l])   # decoder: list[int] -> strin
 The model is trained with the standard **next-token prediction** objective: at every position, predict the next character given all preceding characters in the context window.
 
 $$
-\mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N} \log P(x_i \mid x_{<i})
+ \mathcal{L} = -\frac{1}{N}\sum_{i=1}^{N} \log P(x_i \mid x_{<i})
 $$
 
 where $N = B \times T$ is the number of tokens in a batch (`batch_size × block_size`), and $P(x_i \mid x_{<i})$ is the model's predicted probability for the true next character.
